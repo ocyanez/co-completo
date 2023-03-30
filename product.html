@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Co-COMPLETO - SIMPLEMENTE UN WEBSITE DE COMPLETOS</title>
+    <meta content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" name="viewport">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="lib/lightbox/css/lightbox.min.css" rel="stylesheet">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="css/style.css" rel="stylesheet">
+    <link href="css/style2.css" rel="stylesheet">
+
+
+
+
+    
+
+
+
+    <!-- Start Script-->
+    <div>
+        <script>
+            document.addEventListener('DOMContentLoaded', () => {
+              // Variables
+              const baseDeDatos = [
+                  {
+                      id: 1,
+                      nombre: 'Co-COMPLETO Con Too',
+                      precio: 5000,
+                      imagen: 'img/service-1.jpg'
+                  },
+                  {
+                      id: 2,
+                      nombre: 'Co-COMPLETO Itialiani',
+                      precio: 5000,
+                      imagen: 'img/service-2.jpg'
+                  },
+                  {
+                      id: 3,
+                      nombre: 'Co-COMPLETO Ass',
+                      precio: 5000,
+                      imagen: 'img/service-3.jpg'
+                  },
+                  {
+                      id: 4,
+                      nombre: 'Co-COMPLETO Vegan',
+                      precio: 6000,
+                      imagen: 'img/service-4.jpg'
+                  },
+                  {
+                      id: 5,
+                      nombre: 'Pan(1kg)',
+                      precio: 1500,
+                      imagen: 'img/promotion.jpg'
+                  },
+                  {
+                      id: 6,
+                      nombre: 'Vienesas (5 unidades)',
+                      precio: 2000,
+                      imagen: 'img/longa.jpg'
+                  },
+                  {
+                      id: 7,
+                      nombre: 'Vienesas veganas (5 unidades)',
+                      precio: 2500,
+                      imagen: 'img/longa2.jpg'
+                  },
+                  {
+                      id: 8,
+                      nombre: 'Palta Hass (1kg)',
+                      precio: 4000,
+                      imagen: 'img/palta.jpg'
+                  }
+    
+              ];
+    
+              let carrito = [];
+              const divisa = '$';
+              const DOMitems = document.querySelector('#items');
+              const DOMcarrito = document.querySelector('#carrito');
+              const DOMtotal = document.querySelector('#total');
+              const DOMbotonVaciar = document.querySelector('#boton-vaciar');
+            
+              // Funciones
+    
+              /**
+              * Dibuja todos los productos a partir de la base de datos. No confundir con el carrito
+              */
+              function renderizarProductos() {
+                const miNodoPadre = document.createElement('div');
+                miNodoPadre.classList.add('col');
+                const miNodoDeck = document.createElement('div');
+                miNodoDeck.classList.add('card-deck');
+                baseDeDatos.forEach((info) => {
+                    // Estructura
+                    const miNodo = document.createElement('div');
+                    miNodo.classList.add('card');
+                    // Body
+                    const miNodoCardBody = document.createElement('div');
+                    miNodoCardBody.classList.add('card-body');
+                    // Titulo
+                    const miNodoTitle = document.createElement('h5');
+                    miNodoTitle.classList.add('card-title');
+                    miNodoTitle.textContent = info.nombre;
+                    // Imagen
+                    const miNodoImagen = document.createElement('img');
+                    miNodoImagen.classList.add('img-fluid');
+                    miNodoImagen.classList.add('img-fluid', 'mx-auto');
+                    miNodoImagen.classList.add('img-fluid', 'mx-auto', 'img-thumbnail');
+                    miNodoImagen.setAttribute('src', info.imagen);
+                    // Precio
+                    const miNodoPrecio = document.createElement('p');
+                    miNodoPrecio.classList.add('card-text');
+                    miNodoPrecio.textContent = `${info.precio}${divisa}`;
+                    // Boton
+                    const miNodoBoton = document.createElement('button');
+                    miNodoBoton.classList.add('btn', 'btn-primary');
+                    miNodoBoton.textContent = '+';
+                    miNodoBoton.setAttribute('marcador', info.id);
+                    miNodoBoton.addEventListener('click', anyadirProductoAlCarrito);
+                    // Insertamos
+                    miNodoCardBody.appendChild(miNodoImagen);
+                    miNodoCardBody.appendChild(miNodoTitle);
+                    miNodoCardBody.appendChild(miNodoPrecio);
+                    miNodoCardBody.appendChild(miNodoBoton);
+                    miNodo.appendChild(miNodoCardBody);
+                    miNodoDeck.appendChild(miNodo);
+                });
+                miNodoPadre.appendChild(miNodoDeck);
+                DOMitems.appendChild(miNodoPadre);
+                }
+
+    
+              /**
+              * Evento para añadir un producto al carrito de la compra
+              */
+              function anyadirProductoAlCarrito(evento) {
+                  // Anyadimos el Nodo a nuestro carrito
+                  carrito.push(evento.target.getAttribute('marcador'))
+                  // Actualizamos el carrito 
+                  renderizarCarrito();
+    
+              }
+    
+              /**
+              * Dibuja todos los productos guardados en el carrito
+              */
+              function renderizarCarrito() {
+                  // Vaciamos todo el html
+                  DOMcarrito.textContent = '';
+                  // Quitamos los duplicados
+                  const carritoSinDuplicados = [...new Set(carrito)];
+                  // Generamos los Nodos a partir de carrito
+                  carritoSinDuplicados.forEach((item) => {
+                      // Obtenemos el item que necesitamos de la variable base de datos
+                      const miItem = baseDeDatos.filter((itemBaseDatos) => {
+                          // ¿Coincide las id? Solo puede existir un caso
+                          return itemBaseDatos.id === parseInt(item);
+                      });
+                      // Cuenta el número de veces que se repite el producto
+                      const numeroUnidadesItem = carrito.reduce((total, itemId) => {
+                          // ¿Coincide las id? Incremento el contador, en caso contrario no mantengo
+                          return itemId === item ? total += 1 : total;
+                      }, 0);
+                      // Creamos el nodo del item del carrito
+                      const miNodo = document.createElement('li');
+                      miNodo.classList.add('list-group-item', 'text-right', 'mx-2');
+                      miNodo.textContent = `${numeroUnidadesItem} x ${miItem[0].nombre} - ${miItem[0].precio}${divisa}`;
+                      // Boton de borrar
+                      const miBoton = document.createElement('button');
+                      miBoton.classList.add('btn', 'btn-danger', 'mx-5');
+                      miBoton.textContent = 'X';
+                      miBoton.style.marginLeft = '1rem';
+                      miBoton.dataset.item = item;
+                      miBoton.addEventListener('click', borrarItemCarrito);
+                      // Mezclamos nodos
+                      miNodo.appendChild(miBoton);
+                      DOMcarrito.appendChild(miNodo);
+                  });
+                 // Renderizamos el precio total en el HTML
+                 DOMtotal.textContent = calcularTotal();
+              }
+    
+              /**
+              * Evento para borrar un elemento del carrito
+              */
+              function borrarItemCarrito(evento) {
+                  // Obtenemos el producto ID que hay en el boton pulsado
+                  const id = evento.target.dataset.item;
+                  // Borramos todos los productos
+                  carrito = carrito.filter((carritoId) => {
+                      return carritoId !== id;
+                  });
+                  // volvemos a renderizar
+                  renderizarCarrito();
+              }
+    
+              /**
+               * Calcula el precio total teniendo en cuenta los productos repetidos
+               */
+              function calcularTotal() {
+                  // Recorremos el array del carrito 
+                  return carrito.reduce((total, item) => {
+                      // De cada elemento obtenemos su precio
+                      const miItem = baseDeDatos.filter((itemBaseDatos) => {
+                          return itemBaseDatos.id === parseInt(item);
+                      });
+                      // Los sumamos al total
+                      return total + miItem[0].precio;
+                  }, 0).toFixed(2);
+              }
+    
+              /**
+              * Varia el carrito y vuelve a dibujarlo
+              */
+              function vaciarCarrito() {
+                  // Limpiamos los productos guardados
+                  carrito = [];
+                  // Renderizamos los cambios
+                  renderizarCarrito();
+              }
+    
+              // Eventos
+              DOMbotonVaciar.addEventListener('click', vaciarCarrito);
+    
+              // Inicio
+              renderizarProductos();
+              renderizarCarrito();
+            });
+        </script>
+    </div>
+
+    <!-- End of Script-->
+</head>
+
+<body>
+    <!-- Topbar Start -->
+    <div class="container-fluid bg-primary py-3 d-none d-md-block">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 text-center text-lg-left mb-2 mb-lg-0">
+                    <div class="d-inline-flex align-items-center">
+                        <a class="text-white pr-3" href="">Quienes Somos</a>
+                        <span class="text-white">|</span>
+                        <a class="text-white px-3" href="">Ayuda</a>
+                        <span class="text-white">|</span>
+                        <a class="text-white pl-3" href="">Soporte</a>
+                    </div>
+                </div>
+                <div class="col-md-6 text-center text-lg-right">
+                    <div class="d-inline-flex align-items-center">
+                        <a class="text-white px-3" href="">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a class="text-white px-3" href="">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a class="text-white px-3" href="https://cl.linkedin.com/in/david-isaac-godoy-ibacache-ba957b222">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a class="text-white px-3" href="https://www.instagram.com/sscar.latta/">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a class="text-white pl-3" href="https://www.youtube.com/watch?v=P5RELCJChOI">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Topbar End -->
+
+
+    <!-- Navbar Start -->
+    <div class="container-fluid position-relative nav-bar p-0">
+        <div class="container-lg position-relative p-0 px-lg-3" style="z-index: 9;">
+            <nav class="navbar navbar-expand-lg bg-white navbar-light shadow p-lg-0">
+                <a href="index.html" class="navbar-brand d-block d-lg-none">
+                    <h1 class="m-0 display-4 text-primary"><span class="text-secondary">Co-</span>COMPLETO</h1>
+                </a>
+                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
+                    <div class="navbar-nav ml-auto py-0">
+                        <a href="index.html" class="nav-item nav-link active">Inicio</a>
+                        <a href="about.html" class="nav-item nav-link">Acerca de</a>
+                        <a href="product.html" class="nav-item nav-link">Productos</a>
+                    </div>
+                    <a href="index.html" class="navbar-brand mx-5 d-none d-lg-block">
+                        <h1 class="m-0 display-4 text-primary"><span class="text-secondary">Co-</span>COMPLETO</h1>
+                    </a>
+                    <div class="navbar-nav mr-auto py-0">
+                        <a href="service.html" class="nav-item nav-link">Servicio</a>
+                        <a href="gallery.html" class="nav-item nav-link">Galeria</a>
+                        <a href="contact.html" class="nav-item nav-link">Atencion al cliente</a>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </div>
+    <!-- Navbar End -->
+
+
+    <!-- Header Start -->
+    <div class="jumbotron jumbotron-fluid page-header" style="margin-bottom: 90px;">
+        <div class="container text-center py-5">
+            <h1 class="text-white display-3 mt-lg-5">Productos</h1>
+            <div class="d-inline-flex align-items-center text-white">
+                <p class="m-0"><a class="text-white" href="">Inicio</a></p>
+                <i class="fa fa-circle px-3"></i>
+                <p class="m-0">Producto</p>
+            </div>
+        </div>
+    </div>
+    <!-- Header End -->
+
+
+    <!-- Products Start -->
+
+    <main id="items" class="flex">
+            <aside class="col-sm-4 mx-auto text-center">
+            <h2>Carrito</h2>
+            <!-- Elementos del carrito -->
+            <ul id="carrito" class="list-group"></ul>
+            <!-- Precio total -->
+            <p class="text-right">Total: <span id="total"></span>$</p>
+            <button id="boton-vaciar" class="btn btn-danger">Vaciar</button>
+        </aside> 
+    </main>
+     <!-- Products End -->
+
+
+    <!-- Footer Start -->
+    <div class="container-fluid footer bg-light py-5" style="margin-top: 90px;">
+        <div class="container text-center py-5">
+            <div class="row">
+                <div class="col-12 mb-4">
+                    <a href="index.html" class="navbar-brand m-0">
+                        <h1 class="m-0 mt-n2 display-4 text-primary"><span class="text-secondary">Co-</span>COMPLETO</h1>
+                    </a>
+                </div>
+                <div class="col-12 mb-4">
+                    <a class="btn btn-outline-secondary btn-social mr-2" href="#"><i class="fab fa-twitter"></i></a>
+                    <a class="btn btn-outline-secondary btn-social mr-2" href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a class="btn btn-outline-secondary btn-social mr-2" href="#"><i class="fab fa-linkedin-in"></i></a>
+                    <a class="btn btn-outline-secondary btn-social" href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+                <div class="col-12 mt-2 mb-4">
+                    <div class="row">
+                        <div class="col-sm-6 text-center text-sm-right border-right mb-3 mb-sm-0">
+                            <h5 class="font-weight-bold mb-2">Ubicanos en</h5>
+                            <p class="mb-2">123 Viña del Mar, Valparaiso, Chile</p>
+                            <p class="mb-0">+56947133116</p>
+                        </div>
+                        <div class="col-sm-6 text-center text-sm-left">
+                            <h5 class="font-weight-bold mb-2">Horas de atencion</h5>
+                            <p class="mb-2">Lunes – Sabados, 8AM – 8PM</p>
+                            <p class="mb-0">Domingos: Cerrados</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <p class="m-0">&copy; <a href="#"></a> Todos los derechos reservados <a href="https://www.instagram.com/isa.rtx/">segun yo</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Footer End -->
+
+
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-secondary px-2 back-to-top"><i class="fa fa-angle-double-up"></i></a>
+
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+    <script src="lib/easing/easing.min.js"></script>
+    <script src="lib/waypoints/waypoints.min.js"></script>
+    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+    <script src="lib/isotope/isotope.pkgd.min.js"></script>
+    <script src="lib/lightbox/js/lightbox.min.js"></script>
+
+    <!-- Contact Javascript File -->
+    <script src="mail/jqBootstrapValidation.min.js"></script>
+    <script src="mail/contact.js"></script>
+
+    <!-- Template Javascript -->
+    <script src="js/main.js"></script>
+</body>
+
+</html>

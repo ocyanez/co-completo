@@ -1,0 +1,16 @@
+.card-body img {
+    max-width: 100%;
+    margin: 0 auto;
+  }
+#items {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.card {
+  width: 45%;
+  margin: 10px;
+}
