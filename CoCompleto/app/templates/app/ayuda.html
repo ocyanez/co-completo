@@ -1,0 +1,95 @@
+{% extends "app/base.html" %}
+{% load static %}
+
+{% block js %}
+        <!-- JavaScript Libraries -->
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+        <script src="{% static 'app/lib/easing/easing.min.js' %}"></script>
+        <script src="{% static 'app/lib/waypoints/waypoints.min.js'%}"></script>
+        <script src="{% static 'app/lib/owlcarousel/owl.carousel.min.js'%}"></script>
+        <script src="{% static 'app/lib/isotope/isotope.pkgd.min.js'%}"></script>
+        <script src="{% static 'app/lib/lightbox/js/lightbox.min.js'%}"></script>
+
+        <!-- Contact Javascript File -->
+        <script src="{% static 'app/mail/jqBootstrapValidation.min.js' %}"></script>
+        <script src="{% static 'app/mail/contact.js' %}"></script>
+
+        <!-- Template Javascript -->
+        <script src="{% static 'app/js/main.js' %}"></script>
+{% endblock %}
+
+{%block css%}
+    <!-- Libraries Stylesheet -->
+    <link href="{% static 'app/lib/owlcarousel/assets/owl.carousel.min.css'%}" rel="stylesheet">
+    <link href="{% static 'app/lib/lightbox/css/lightbox.min.css'%}" rel="stylesheet">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="{% static 'app/css/style.css'%} " rel="stylesheet">
+
+{%endblock%}
+
+{% block contenido1 %}
+
+    <!-- Header Start -->
+    <div class="jumbotron jumbotron-fluid page-header" style="margin-bottom: 90px;">
+        <div class="container text-center py-5">
+            <h1 class="text-white display-3 mt-lg-5">¿Necesitas ayuda?</h1>
+            <div class="d-inline-flex align-items-center text-white">
+                <p class="m-0"><a class="text-white" href="">Inicio</a></p>
+                <i class="fa fa-circle px-3"></i>
+                <p class="m-0">Ayuda</p>
+            </div>
+        </div>
+    </div>
+    <!-- Header End -->
+
+
+    <!-- Contact Start -->
+    <div class="container-fluid py-5">
+        <div class="container py-5">
+            <div class="row justify-content-center">
+                <div class="col-lg-6">
+                    <br>
+                    <h1 class="section-title position-relative text-center mb-5">Envíanos un correo y cuéntanos tu problema</h1>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-lg-9">
+                    <div class="contact-form bg-light rounded p-5">
+                        <div id="success"></div>
+                        <form name="sentMessage" id="contactForm" novalidate="novalidate">
+                            <div class="form-row">
+                                <div class="col-sm-6 control-group">
+                                    <input type="text" class="form-control p-4" id="name" placeholder="TU NOMBRE" required="required" data-validation-required-message="Por Favor Ingresa Tu Nombre" />
+                                    <p class="help-block text-danger"></p>
+                                </div>
+                                <div class="col-sm-6 control-group">
+                                    <input type="email" class="form-control p-4" id="email" placeholder="TU CORREO ELECTRONICO" required="required" data-validation-required-message="Por Favor Ingresa Tu Correo" />
+                                    <p class="help-block text-danger"></p>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <input type="text" class="form-control p-4" id="subject" placeholder="ASUNTO" required="required" data-validation-required-message="Por Favor Ingresa El Motivo" />
+                                <p class="help-block text-danger"></p>
+                            </div>
+                            <div class="control-group">
+                                <textarea class="form-control p-4" rows="6" id="message" placeholder="MENSAJE" required="required" data-validation-required-message="Por Favor Escribe Tu Mensaje"></textarea>
+                                <p class="help-block text-danger"></p>
+                            </div>
+                            <div>
+                                <button class="btn btn-primary btn-block py-3 px-5" type="submit" id="sendMessageButton">Enviar mensaje</button>
+                            </div>
+                            <div>
+                                <br>
+                                <h3 class="section-title position-relative text-center mb-5">Te contactaremos lo antes posible.</h3>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Contact End -->
+
+{% endblock %}

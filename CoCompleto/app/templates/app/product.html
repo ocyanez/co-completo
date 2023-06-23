@@ -1,0 +1,278 @@
+{% extends "app/base.html" %}
+{% load static %}
+
+{% block js %}
+        <!-- JavaScript Libraries -->
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+        <script src="{% static 'app/lib/easing/easing.min.js' %}"></script>
+        <script src="{% static 'app/lib/waypoints/waypoints.min.js'%}"></script>
+        <script src="{% static 'app/lib/owlcarousel/owl.carousel.min.js'%}"></script>
+        <script src="{% static 'app/lib/isotope/isotope.pkgd.min.js'%}"></script>
+        <script src="{% static 'app/lib/lightbox/js/lightbox.min.js'%}"></script>
+
+        <!-- Contact Javascript File -->
+        <script src="{% static 'app/mail/jqBootstrapValidation.min.js' %}"></script>
+        <script src="{% static 'app/mail/contact.js' %}"></script>
+
+        <!-- Template Javascript -->
+        <script src="{% static 'app/js/main.js' %}"></script>
+{% endblock %}
+
+{%block css%}
+    <!-- Libraries Stylesheet -->
+    <link href="{% static 'app/lib/owlcarousel/assets/owl.carousel.min.css'%}" rel="stylesheet">
+    <link href="{% static 'app/lib/lightbox/css/lightbox.min.css'%}" rel="stylesheet">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="{% static 'app/css/style.css'%} " rel="stylesheet">
+
+{%endblock%}
+
+{% block contenido1 %}
+
+    <!-- Start Script-->
+    <div>
+        <script>
+            document.addEventListener('DOMContentLoaded', () => {
+              // Variables
+              const baseDeDatos = [
+                  {
+                      id: 1,
+                      nombre: 'Co-COMPLETO Con Too',
+                      precio: 5000,
+                      imagen: {% static 'app/img/service-1.jpg'%}
+                  },
+                  {
+                      id: 2,
+                      nombre: 'Co-COMPLETO Itialiani',
+                      precio: 5000,
+                      imagen: {% static 'app/img/service-2.jpg'%}
+                  },
+                  {
+                      id: 3,
+                      nombre: 'Co-COMPLETO Ass',
+                      precio: 5000,
+                      imagen: {% static 'app/img/service-3.jpg'%}
+                  },
+                  {
+                      id: 4,
+                      nombre: 'Co-COMPLETO Vegan',
+                      precio: 6000,
+                      imagen: {% static 'app/img/service-4.jpg'%}
+                  },
+                  {
+                      id: 5,
+                      nombre: 'Pan(1kg)',
+                      precio: 1500,
+                      imagen: {% static 'app/img/promotion.jpg'%}
+                  },
+                  {
+                      id: 6,
+                      nombre: 'Vienesas (5 unidades)',
+                      precio: 2000,
+                      imagen: {% static 'app/img/longa.jpg'%}
+                  },
+                  {
+                      id: 7,
+                      nombre: 'Vienesas veganas (5 unidades)',
+                      precio: 2500,
+                      imagen: {% static 'app/img/longa2.jpg'%}
+                  },
+                  {
+                      id: 8,
+                      nombre: 'Palta Hass (1kg)',
+                      precio: 4000,
+                      imagen: {% static 'app/img/palta.jpg'%}
+                  }
+    
+              ];
+    
+              let carrito = [];
+              const divisa = '$';
+              const DOMitems = document.querySelector('#items');
+              const DOMcarrito = document.querySelector('#carrito');
+              const DOMtotal = document.querySelector('#total');
+              const DOMbotonVaciar = document.querySelector('#boton-vaciar');
+            
+              // Funciones
+    
+              /**
+              * Dibuja todos los productos a partir de la base de datos. No confundir con el carrito
+              */
+              function renderizarProductos() {
+                const miNodoPadre = document.createElement('div');
+                miNodoPadre.classList.add('col');
+                const miNodoDeck = document.createElement('div');
+                miNodoDeck.classList.add('card-deck');
+                baseDeDatos.forEach((info) => {
+                    // Estructura
+                    const miNodo = document.createElement('div');
+                    miNodo.classList.add('card');
+                    // Body
+                    const miNodoCardBody = document.createElement('div');
+                    miNodoCardBody.classList.add('card-body');
+                    // Titulo
+                    const miNodoTitle = document.createElement('h5');
+                    miNodoTitle.classList.add('card-title');
+                    miNodoTitle.textContent = info.nombre;
+                    // Imagen
+                    const miNodoImagen = document.createElement('img');
+                    miNodoImagen.classList.add('img-fluid');
+                    miNodoImagen.classList.add('img-fluid', 'mx-auto');
+                    miNodoImagen.classList.add('img-fluid', 'mx-auto', 'img-thumbnail');
+                    miNodoImagen.setAttribute('src', info.imagen);
+                    // Precio
+                    const miNodoPrecio = document.createElement('p');
+                    miNodoPrecio.classList.add('card-text');
+                    miNodoPrecio.textContent = `${divisa}${info.precio}`;
+                    // Boton
+                    const miNodoBoton = document.createElement('button');
+                    miNodoBoton.classList.add('btn', 'btn-primary');
+                    miNodoBoton.textContent = '+';
+                    miNodoBoton.setAttribute('marcador', info.id);
+                    miNodoBoton.addEventListener('click', anyadirProductoAlCarrito);
+                    // Insertamos
+                    miNodoCardBody.appendChild(miNodoImagen);
+                    miNodoCardBody.appendChild(miNodoTitle);
+                    miNodoCardBody.appendChild(miNodoPrecio);
+                    miNodoCardBody.appendChild(miNodoBoton);
+                    miNodo.appendChild(miNodoCardBody);
+                    miNodoDeck.appendChild(miNodo);
+                });
+                miNodoPadre.appendChild(miNodoDeck);
+                DOMitems.appendChild(miNodoPadre);
+                }
+
+    
+              /**
+              * Evento para añadir un producto al carrito de la compra
+              */
+              function anyadirProductoAlCarrito(evento) {
+                  // Anyadimos el Nodo a nuestro carrito
+                  carrito.push(evento.target.getAttribute('marcador'))
+                  // Actualizamos el carrito 
+                  renderizarCarrito();
+    
+              }
+    
+              /**
+              * Dibuja todos los productos guardados en el carrito
+              */
+              function renderizarCarrito() {
+                  // Vaciamos todo el html
+                  DOMcarrito.textContent = '';
+                  // Quitamos los duplicados
+                  const carritoSinDuplicados = [...new Set(carrito)];
+                  // Generamos los Nodos a partir de carrito
+                  carritoSinDuplicados.forEach((item) => {
+                      // Obtenemos el item que necesitamos de la variable base de datos
+                      const miItem = baseDeDatos.filter((itemBaseDatos) => {
+                          // ¿Coincide las id? Solo puede existir un caso
+                          return itemBaseDatos.id === parseInt(item);
+                      });
+                      // Cuenta el número de veces que se repite el producto
+                      const numeroUnidadesItem = carrito.reduce((total, itemId) => {
+                          // ¿Coincide las id? Incremento el contador, en caso contrario no mantengo
+                          return itemId === item ? total += 1 : total;
+                      }, 0);
+                      // Creamos el nodo del item del carrito
+                      const miNodo = document.createElement('li');
+                      miNodo.classList.add('list-group-item', 'text-right', 'mx-2');
+                      miNodo.textContent = `${numeroUnidadesItem} x ${miItem[0].nombre} - ${miItem[0].precio}${divisa}`;
+                      // Boton de borrar
+                      const miBoton = document.createElement('button');
+                      miBoton.classList.add('btn', 'btn-danger', 'btn-sm-1', 'mx-5');
+                      miBoton.ariaSetSize = 
+                      miBoton.textContent = 'x';
+                      miBoton.style.marginLeft = '1rem';
+                      miBoton.dataset.item = item;
+                      miBoton.addEventListener('click', borrarItemCarrito);
+                      // Mezclamos nodos
+                      miNodo.appendChild(miBoton);
+                      DOMcarrito.appendChild(miNodo);
+                  });
+                 // Renderizamos el precio total en el HTML
+                 DOMtotal.textContent = calcularTotal();
+              }
+    
+              /**
+              * Evento para borrar un elemento del carrito
+              */
+              function borrarItemCarrito(evento) {
+                  // Obtenemos el producto ID que hay en el boton pulsado
+                  const id = evento.target.dataset.item;
+                  // Borramos todos los productos
+                  carrito = carrito.filter((carritoId) => {
+                      return carritoId !== id;
+                  });
+                  // volvemos a renderizar
+                  renderizarCarrito();
+              }
+    
+              /**
+               * Calcula el precio total teniendo en cuenta los productos repetidos
+               */
+              function calcularTotal() {
+                  // Recorremos el array del carrito 
+                  return carrito.reduce((total, item) => {
+                      // De cada elemento obtenemos su precio
+                      const miItem = baseDeDatos.filter((itemBaseDatos) => {
+                          return itemBaseDatos.id === parseInt(item);
+                      });
+                      // Los sumamos al total
+                      return total + miItem[0].precio;
+                  }, 0).toFixed(0);
+              }
+    
+              /**
+              * Varia el carrito y vuelve a dibujarlo
+              */
+              function vaciarCarrito() {
+                  // Limpiamos los productos guardados
+                  carrito = [];
+                  // Renderizamos los cambios
+                  renderizarCarrito();
+              }
+    
+              // Eventos
+              DOMbotonVaciar.addEventListener('click', vaciarCarrito);
+    
+              // Inicio
+              renderizarProductos();
+              renderizarCarrito();
+            });
+        </script>
+    </div>
+
+    <!-- End of Script-->
+
+
+    <!-- Header Start -->
+    <div class="jumbotron jumbotron-fluid page-header" style="margin-bottom: 90px;">
+        <div class="container text-center py-5">
+            <h1 class="text-white display-3 mt-lg-5">Productos</h1>
+            <div class="d-inline-flex align-items-center text-white">
+                <p class="m-0"><a class="text-white" href="">Inicio</a></p>
+                <i class="fa fa-circle px-3"></i>
+                <p class="m-0">Producto</p>
+            </div>
+        </div>
+    </div>
+    <!-- Header End -->
+
+
+    <!-- Products Start -->
+
+    <main id="items" class="flex">
+            <aside class="col-sm-2 text-lg-left">
+            <h2>Carrito</h2>
+            <!-- Elementos del carrito -->
+            <ul id="carrito" class="list-group"></ul>
+            <!-- Precio total -->
+            <p class="text-right">Total: $<span id="total"></span></p>
+            <button id="boton-vaciar" class="btn btn-danger">Vaciar</button>
+        </aside> 
+    </main>
+     <!-- Products End -->
+{% endblock %}
