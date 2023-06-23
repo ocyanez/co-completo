@@ -1,0 +1,121 @@
+{% extends "app/base.html" %}
+{% load static %}
+
+{% block js %}
+        <!-- JavaScript Libraries -->
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+        <script src="{% static 'app/lib/easing/easing.min.js' %}"></script>
+        <script src="{% static 'app/lib/waypoints/waypoints.min.js'%}"></script>
+        <script src="{% static 'app/lib/owlcarousel/owl.carousel.min.js'%}"></script>
+        <script src="{% static 'app/lib/isotope/isotope.pkgd.min.js'%}"></script>
+        <script src="{% static 'app/lib/lightbox/js/lightbox.min.js'%}"></script>
+
+        <!-- Contact Javascript File -->
+        <script src="{% static 'app/mail/jqBootstrapValidation.min.js' %}"></script>
+        <script src="{% static 'app/mail/contact.js' %}"></script>
+
+        <!-- Template Javascript -->
+        <script src="{% static 'app/js/main.js' %}"></script>
+{% endblock %}
+
+{%block css%}
+    <!-- Libraries Stylesheet -->
+    <link href="{% static 'app/lib/owlcarousel/assets/owl.carousel.min.css'%}" rel="stylesheet">
+    <link href="{% static 'app/lib/lightbox/css/lightbox.min.css'%}" rel="stylesheet">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="{% static 'app/css/style.css'%} " rel="stylesheet">
+
+{%endblock%}
+
+{% block contenido1 %}
+
+
+    <!-- Header Start -->
+    <div class="jumbotron jumbotron-fluid page-header" style="margin-bottom: 90px;">
+        <div class="container text-center py-5">
+            <h1 class="text-white display-3 mt-lg-5">Lo mejor de lo mejor</h1>
+            <div class="d-inline-flex align-items-center text-white">
+                <p class="m-0"><a class="text-white" href="">Inicio</a></p>
+                <i class="fa fa-circle px-3"></i>
+                <p class="m-0">Galería</p>
+            </div>
+        </div>
+    </div>
+    <!-- Header End -->
+
+
+    <!-- Portfolio Start -->
+    <div class="container-fluid py-5 px-0">
+        <div class="container py-5">
+            <div class="row justify-content-center">
+                <div class="col-lg-5">
+                    <h1 class="section-title position-relative text-center mb-5">Los mejores acompañantes</h1>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 text-center">
+                    <ul class="list-inline mb-4 pb-2" id="portfolio-flters">
+                        <li class="btn btn-sm btn-outline-primary m-1 active"  data-filter="*">Todo</li>
+                        <li class="btn btn-sm btn-outline-primary m-1" data-filter=".first">Liviano</li>
+                        <li class="btn btn-sm btn-outline-primary m-1" data-filter=".second">Llenador</li>
+                        <li class="btn btn-sm btn-outline-primary m-1" data-filter=".third">Gustitos</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row m-0 portfolio-container">
+                <div class="col-lg-4 col-md-6 p-0 portfolio-item first">
+                    <div class="position-relative overflow-hidden">
+                        <img class="img-fluid w-100" src="{% static 'app/img/portfolio-1.jpg'%}" alt="">
+                        <a class="portfolio-btn" href="{% static 'app/img/portfolio-1.jpg'%}" data-lightbox="portfolio">
+                            <i class="fa fa-plus text-primary" style="font-size: 60px;"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 p-0 portfolio-item second">
+                    <div class="position-relative overflow-hidden">
+                        <img class="img-fluid w-100" src="{% static 'app/img/portfolio-2.jpg'%}" alt="">
+                        <a class="portfolio-btn" href="{% static 'app/img/portfolio-2.jpg'%}" data-lightbox="portfolio">
+                            <i class="fa fa-plus text-primary" style="font-size: 60px;"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 p-0 portfolio-item third">
+                    <div class="position-relative overflow-hidden">
+                        <img class="img-fluid w-100" src="{% static 'app/img/portfolio-3.jpg'%}" alt="">
+                        <a class="portfolio-btn" href="{% static 'app/img/portfolio-3.jpg'%}" data-lightbox="portfolio">
+                            <i class="fa fa-plus text-primary" style="font-size: 60px;"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 p-0 portfolio-item first">
+                    <div class="position-relative overflow-hidden">
+                        <img class="img-fluid w-100" src="{% static 'app/img/portfolio-4.jpg'%}" alt="">
+                        <a class="portfolio-btn" href="{% static 'app/img/portfolio-4.jpg'%}" data-lightbox="portfolio">
+                            <i class="fa fa-plus text-primary" style="font-size: 60px;"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 p-0 portfolio-item second">
+                    <div class="position-relative overflow-hidden">
+                        <img class="img-fluid w-100" src="{% static 'app/img/portfolio-5.jpg'%}" alt="">
+                        <a class="portfolio-btn" href="{% static 'app/img/portfolio-5.jpg'%}" data-lightbox="portfolio">
+                            <i class="fa fa-plus text-primary" style="font-size: 60px;"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 p-0 portfolio-item third">
+                    <div class="position-relative overflow-hidden">
+                        <img class="img-fluid w-100" src="{% static 'app/img/portfolio-6.jpg'%}" alt="">
+                        <a class="portfolio-btn" href="{% static 'app/img/portfolio-6.jpg'%}" data-lightbox="portfolio">
+                            <i class="fa fa-plus text-primary" style="font-size: 60px;"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Portfolio End -->
+
+{% endblock %}

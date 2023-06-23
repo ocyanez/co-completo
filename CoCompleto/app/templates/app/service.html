@@ -1,0 +1,107 @@
+{% extends "app/base.html" %}
+{% load static %}
+
+{% block js %}
+        <!-- JavaScript Libraries -->
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+        <script src="{% static 'app/lib/easing/easing.min.js' %}"></script>
+        <script src="{% static 'app/lib/waypoints/waypoints.min.js'%}"></script>
+        <script src="{% static 'app/lib/owlcarousel/owl.carousel.min.js'%}"></script>
+        <script src="{% static 'app/lib/isotope/isotope.pkgd.min.js'%}"></script>
+        <script src="{% static 'app/lib/lightbox/js/lightbox.min.js'%}"></script>
+
+        <!-- Contact Javascript File -->
+        <script src="{% static 'app/mail/jqBootstrapValidation.min.js' %}"></script>
+        <script src="{% static 'app/mail/contact.js' %}"></script>
+
+        <!-- Template Javascript -->
+        <script src="{% static 'app/js/main.js' %}"></script>
+{% endblock %}
+
+{%block css%}
+    <!-- Libraries Stylesheet -->
+    <link href="{% static 'app/lib/owlcarousel/assets/owl.carousel.min.css'%}" rel="stylesheet">
+    <link href="{% static 'app/lib/lightbox/css/lightbox.min.css'%}" rel="stylesheet">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="{% static 'app/css/style.css'%} " rel="stylesheet">
+
+{%endblock%}
+
+{% block contenido1 %}
+
+    <!-- Header Start -->
+    <div class="jumbotron jumbotron-fluid page-header" style="margin-bottom: 90px;">
+        <div class="container text-center py-5">
+            <h1 class="text-white display-3 mt-lg-5">Polular</h1>
+            <div class="d-inline-flex align-items-center text-white">
+                <p class="m-0"><a class="text-white" href="">Incio</a></p>
+                <i class="fa fa-circle px-3"></i>
+                <p class="m-0">Productos</p>
+            </div>
+        </div>
+    </div>
+    <!-- Header End -->
+
+
+    <!-- Services Start -->
+    <div class="container-fluid py-5">
+        <div class="container py-5">
+            <div class="row">
+                <div class="col-lg-6">
+                    <h1 class="section-title position-relative mb-5">Lo más pedido</h1>
+                </div>
+                <div class="col-lg-6 mb-5 mb-lg-0 pb-5 pb-lg-0"></div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="owl-carousel service-carousel">
+                        <div class="service-item">
+                            <div class="service-img mx-auto">
+                                <img class="rounded-circle w-100 h-100 bg-light p-3" src="{% static 'app/img/service-1.jpg'%}" style="object-fit: cover;">
+                            </div>
+                            <div class="position-relative text-center bg-light rounded p-4 pb-5" style="margin-top: -75px;">
+                                <h5 class="font-weight-semi-bold mt-5 mb-3 pt-5">Co-COMPLETO Con Too'</h5>
+                                <p>Dolor nonumy sed eos sed lorem diam amet eos magna. Dolor kasd lorem duo stet kasd justo</p>
+                                <a href="" class="border-bottom border-secondary text-decoration-none text-secondary">Ingredientes</a>
+                            </div>
+                        </div>
+                        <div class="service-item">
+                            <div class="service-img mx-auto">
+                                <img class="rounded-circle w-100 h-100 bg-light p-3" src="{% static 'app/img/service-2.jpg'%}" style="object-fit: cover;">
+                            </div>
+                            <div class="position-relative text-center bg-light rounded p-4 pb-5" style="margin-top: -75px;">
+                                <h5 class="font-weight-semi-bold mt-5 mb-3 pt-5">Co-COMPLETO Itialiani</h5>
+                                <p>Dolor nonumy sed eos sed lorem diam amet eos magna. Dolor kasd lorem duo stet kasd justo</p>
+                                <a href="" class="border-bottom border-secondary text-decoration-none text-secondary">Ingredientes</a>
+                            </div>
+                        </div>
+                        <div class="service-item">
+                            <div class="service-img mx-auto">
+                                <img class="rounded-circle w-100 h-100 bg-light p-3" src="{% static 'app/img/service-3.jpg'%}" style="object-fit: cover;">
+                            </div>
+                            <div class="position-relative text-center bg-light rounded p-4 pb-5" style="margin-top: -75px;">
+                                <h5 class="font-weight-semi-bold mt-5 mb-3 pt-5">Co-COMPLETO Ass</h5>
+                                <p>Dolor nonumy sed eos sed lorem diam amet eos magna. Dolor kasd lorem duo stet kasd justo</p>
+                                <a href="" class="border-bottom border-secondary text-decoration-none text-secondary">Ingredientes</a>
+                            </div>
+                        </div>
+                        <div class="service-item">
+                            <div class="service-img mx-auto">
+                                <img class="rounded-circle w-100 h-100 bg-light p-3" src="{% static 'app/img/service-4.jpg'%}" style="object-fit: cover;">
+                            </div>
+                            <div class="position-relative text-center bg-light rounded p-4 pb-5" style="margin-top: -75px;">
+                                <h5 class="font-weight-semi-bold mt-5 mb-3 pt-5">Co-COMPLETO Vegan</h5>
+                                <p>Dolor nonumy sed eos sed lorem diam amet eos magna. Dolor kasd lorem duo stet kasd justo</p>
+                                <a href="" class="border-bottom border-secondary text-decoration-none text-secondary">Ingredientes</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Services End -->
+    
+{% endblock %}

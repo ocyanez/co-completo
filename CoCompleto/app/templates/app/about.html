@@ -1,0 +1,80 @@
+{% extends "app/base.html" %}
+{% load static %}
+
+{% block js %}
+        <!-- JavaScript Libraries -->
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+        <script src="{% static 'app/lib/easing/easing.min.js' %}"></script>
+        <script src="{% static 'app/lib/waypoints/waypoints.min.js'%}"></script>
+        <script src="{% static 'app/lib/owlcarousel/owl.carousel.min.js'%}"></script>
+        <script src="{% static 'app/lib/isotope/isotope.pkgd.min.js'%}"></script>
+        <script src="{% static 'app/lib/lightbox/js/lightbox.min.js'%}"></script>
+
+        <!-- Contact Javascript File -->
+        <script src="{% static 'app/mail/jqBootstrapValidation.min.js' %}"></script>
+        <script src="{% static 'app/mail/contact.js' %}"></script>
+
+        <!-- Template Javascript -->
+        <script src="{% static 'app/js/main.js' %}"></script>
+{% endblock %}
+
+{%block css%}
+    <!-- Libraries Stylesheet -->
+    <link href="{% static 'app/lib/owlcarousel/assets/owl.carousel.min.css'%}" rel="stylesheet">
+    <link href="{% static 'app/lib/lightbox/css/lightbox.min.css'%}" rel="stylesheet">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="{% static 'app/css/style.css'%} " rel="stylesheet">
+
+{%endblock%}
+
+{% block contenido1 %}
+
+    <!-- Header Start -->
+    <div class="jumbotron jumbotron-fluid page-header" style="margin-bottom: 90px;">
+        <div class="container text-center py-5">
+            <h1 class="text-white display-3 mt-lg-5">Más Sobre Nustros Productos</h1>
+            <div class="d-inline-flex align-items-center text-white">
+                <p class="m-0"><a class="text-white" href="">Inicio</a></p>
+                <i class="fa fa-circle px-3"></i>
+                <p class="m-0">Más</p>
+            </div>
+        </div>
+    </div>
+    <!-- Header End -->
+
+
+    <!-- About Start -->
+    <div class="container-fluid py-5">
+        <div class="container py-5">
+            <div class="row justify-content-center">
+                <div class="col-lg-7">
+                    <h1 class="section-title position-relative text-center mb-5">Co-COMPLETO</h1>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 py-5">
+                    <h4 class="font-weight-bold mb-3">Acerca de nuestro completo</h4>
+                    <h5 class="text-muted mb-3">¿Por qué se le dice completo?</h5>
+                    <p>Al clásico pan y vienesa le agregó una crema en base a papas y huevos, chucrut, tomate, palta, perejil y cebolla, y lo bautizó como “Completo” por todos sus ingredientes. Fue tan buena la recepción, que muchos comenzaron a imitarlo, pero también con sus propias variaciones.</p>
+                    <a href="" class="btn btn-secondary mt-2">leer más</a>
+                </div>
+                <div class="col-lg-4" style="min-height: 400px;">
+                    <div class="position-relative h-100 rounded overflow-hidden">
+                        <img class="position-absolute w-100 h-100" src="{% static 'app/img/about.jpg'%}" style="object-fit: cover;">
+                    </div>
+                </div>
+                <div class="col-lg-4 py-5">
+                    <h4 class="font-weight-bold mb-3">ORDENA AHORA!</h4>
+                    <p>Esto es lo que hace rico un completo...</p>
+                    <h5 class="text-muted mb-3"><i class="fa fa-check text-secondary mr-3"></i>Mayo Casera</h5>
+                    <h5 class="text-muted mb-3"><i class="fa fa-check text-secondary mr-3"></i>Palta 100% Natural</h5>
+                    <h5 class="text-muted mb-3"><i class="fa fa-check text-secondary mr-3"></i>El mejor del mercado</h5>
+                    <a href="{% url 'product'%}" class="btn btn-primary mt-2">AGREGAR +</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- About End -->
+{% endblock %}
