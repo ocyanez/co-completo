@@ -21,18 +21,25 @@ El objetivo del proyecto fue aplicar conceptos de desarrollo web, organización 
 ##  Tecnologías utilizadas
 
 - HTML  
-- CSS  
-- JavaScript  
+- Python 
+- JavaScript
+- Django
+- Bootstrap
+- CSS
+- Sqlite
 
 *(Proyecto desarrollado sin frameworks, enfocado en fundamentos de desarrollo web.)*
 
 ##  Estructura del proyecto
 
 co-completo/
-│── index.html
-│── css/
-│── js/
-│── img/
+   │── CoCompleto
+   README.md
+      │── app
+      │── CoCompleto
+      db.sqlite3
+      manage.py
+     
 
 ## Cómo ejecutar el proyecto
 
@@ -40,8 +47,6 @@ co-completo/
    ```bash
    git clone https://github.com/ocyanez/co-completo.git
 Abrir el archivo index.html en cualquier navegador web.
-
-No requiere instalación de dependencias adicionales.
 
  Autor
 Octavio Yáñez
